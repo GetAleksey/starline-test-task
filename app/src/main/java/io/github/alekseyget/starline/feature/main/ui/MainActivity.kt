@@ -6,11 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import io.github.alekseyget.starline.R
 import io.github.alekseyget.starline.databinding.ActivityMainBinding
+import io.github.alekseyget.starline.utils.appComponent
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
+
+    @Inject
+    lateinit var viewModelFactory: dagger.Lazy<MainViewModel.Factory>
+
+    private val viewModel: MainViewModel by viewModels(null) {
+        viewModelFactory.get()
+    }
 
     private val adapter = PostsAdapter { id ->
         viewModel.loadImage(id)
@@ -18,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appComponent.inject(this)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.adapter = adapter
