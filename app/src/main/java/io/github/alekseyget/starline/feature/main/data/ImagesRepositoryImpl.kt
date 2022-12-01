@@ -1,6 +1,6 @@
 package io.github.alekseyget.starline.feature.main.data
 
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import java.io.File
 import java.io.IOException
 import java.security.MessageDigest
@@ -12,13 +12,13 @@ class ImagesRepositoryImpl @Inject constructor(
     @param:Named("cacheDir") private val cacheDirectory: File
 ) : ImagesRepository {
 
-    override fun getImage(url: String): Observable<String> {
-        return Observable.create { emitter ->
+    override fun getImage(url: String): Single<String> {
+        return Single.create { emitter ->
             val filename = getFilename(url)
             val file = File(cacheDirectory, filename)
 
             if (file.exists()) {
-                emitter.onNext(file.absolutePath)
+                emitter.onSuccess(file.absolutePath)
                 return@create
             }
 
@@ -28,7 +28,7 @@ class ImagesRepositoryImpl @Inject constructor(
                 emitter.onError(ex)
             }
 
-            emitter.onNext(file.absolutePath)
+            emitter.onSuccess(file.absolutePath)
         }
 
     }
