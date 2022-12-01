@@ -2,7 +2,7 @@ package io.github.alekseyget.starline.utils
 
 import android.content.Context
 import io.github.alekseyget.starline.App
-import io.github.alekseyget.starline.feature.di.AppComponent
+import io.github.alekseyget.starline.di.AppComponent
 
 val Context.appComponent: AppComponent
     get() = when (this) {

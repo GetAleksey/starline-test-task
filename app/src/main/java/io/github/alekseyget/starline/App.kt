@@ -1,9 +1,9 @@
 package io.github.alekseyget.starline
 
 import android.app.Application
-import io.github.alekseyget.starline.feature.di.AppComponent
-import io.github.alekseyget.starline.feature.di.AppModule
-import io.github.alekseyget.starline.feature.di.DaggerAppComponent
+import io.github.alekseyget.starline.di.AppComponent
+import io.github.alekseyget.starline.di.AppModule
+import io.github.alekseyget.starline.di.DaggerAppComponent
 
 class App : Application() {
 

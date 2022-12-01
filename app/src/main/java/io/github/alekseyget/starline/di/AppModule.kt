@@ -1,4 +1,4 @@
-package io.github.alekseyget.starline.feature.di
+package io.github.alekseyget.starline.di
 
 import android.app.Application
 import android.content.Context
